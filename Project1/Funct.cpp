@@ -27,23 +27,16 @@ vector<string> split(const string& fLine, const char& item)
 	return arr_result;
 }
 
-	// Delete Needlessly Element From Vector 
-void delete_needlessly(string &item_group, int i) {
-	for (int j = i + 1; j < item_group.size() - 1; ++j) {
-		item_group[j] = item_group[j + 1];
-	}
-	item_group.pop_back();
-}
 
 
 	// DataBase
 extern const string lat = "abcdefghijklmnopqrstuvwxyz";
 extern const string kir = "абвгґдеєжзиіїйклмнопрстуфхцчшщьюя";
-extern map<char, char> dict = { {'a','a' },{'b','б' },{'v','в' },{'h','г' },{'d','д' },{'e','е' }
+extern map<wchar_t, wchar_t> dict = { {'a','a' },{'b','б' },{'v','в' },{'h','г' },{'d','д' },{'e','е' }
 	,{'z','з' },{'g','ґ' },{'y','и' },{'i','i' },{'j','й' },{'k','к' },{'l','л' },{'m','м' },{'n','н' }
 	,{'o','о' },{'p','п' },{'r','р' },{'s','с' },{'t','т' },{'u','у' },{'f','ф' },{'x','х' }
 	,{'`','ь' },{'c','ц' } };
-extern map<string, char> dict1 = { {"ja",'я'},{"je", 'є'},{"ju", 'ю'}, {"ji", 'ї'}, {"zh", 'ж'}, {"ch", 'ч'},{"sh", 'ш'},{"shch", 'щ'} };
+extern map<string, wchar_t> dict1 = { {"ja",'я'},{"je", 'є'},{"ju", 'ю'}, {"ji", 'ї'}, {"zh", 'ж'}, {"ch", 'ч'},{"sh", 'ш'},{"shch", 'щ'} };
 
 void func() {
 	SetConsoleOutputCP(1251);
@@ -83,13 +76,13 @@ void func() {
 								res_SHCH += item_group[i + 3];
 								if (res_SHCH == "shch") {
 									letter = dict1[res_SHCH];
-									delete_needlessly(item_group, i + 2);
-									delete_needlessly(item_group, i + 1);
-									delete_needlessly(item_group, i);
+									item_group.erase(i + 3);
+									item_group.erase(i + 2);
+									item_group.erase(i + 1);
 								}
 								else {
 									letter = dict1[res];
-									delete_needlessly(item_group, i);
+									item_group.erase(i);
 								}
 
 							}
@@ -97,33 +90,33 @@ void func() {
 				case 'j':
 					if (res == "ja") {
 						letter = dict1[res];
-						delete_needlessly(item_group, i);
+						item_group.erase(i + 1);
 					}
 					if (res == "je") {
 						letter = dict1[res];
-						delete_needlessly(item_group, i);
+						item_group.erase(i + 1);
 
 					}
 					if (res == "ju") {
 						letter = dict1[res];
-						delete_needlessly(item_group, i);
+						item_group.erase(i + 1);
 
 					}
 					if (res == "ji") {
 						letter = dict1[res];
-						delete_needlessly(item_group, i);
+						item_group.erase(i + 1);
 
 					}
 				case 'z':
 					if (res == "zh") {
 						letter = dict1[res];
-						delete_needlessly(item_group, i);
+						item_group.erase(i + 1);
 
 					}
 				case 'c':
 					if (res == "ch") {
 						letter = dict1[res];
-						delete_needlessly(item_group, i);
+						item_group.erase(i + 1);
 
 					}
 
